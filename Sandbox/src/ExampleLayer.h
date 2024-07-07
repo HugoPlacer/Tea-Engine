@@ -2,6 +2,7 @@
 
 #include <TeaEngine/Renderer/RendererAPI.h>
 #include <TeaEngine/Renderer/Shader.h>
+#include <TeaEngine/Renderer/Texture.h>
 #include <TeaEngine/Core/Layer.h>
 
 class ExampleLayer : public Tea::Layer
@@ -12,6 +13,8 @@ public:
     void OnUpdate() override;
 
     void OnEvent(Tea::Event& event);
+
+    void OnImGuiRender();
 private:
     Tea::Ref<Tea::VertexArray> m_VertexArray;
     Tea::Ref<Tea::VertexBuffer> m_VertexBuffer;
@@ -19,4 +22,5 @@ private:
     Tea::Scope<Tea::RendererAPI> m_RendererAPI;
 
     Tea::Ref<Tea::Shader> m_defaultShader;
+    Tea::Ref<Tea::Texture> m_Texture;
 };
