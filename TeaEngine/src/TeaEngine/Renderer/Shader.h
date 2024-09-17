@@ -1,6 +1,7 @@
 #pragma once
 
 #include "TeaEngine/Core/Base.h"
+#include "TeaEngine/IO/Resource.h"
 
 #include <glad/glad.h>
 #include <glm/glm.hpp>
@@ -10,7 +11,7 @@
 
 namespace Tea {
 
-    class Shader
+    class Shader : public Resource
     {
     public:
         Shader(const std::string& vertexPath, const std::string& fragmentPath);
@@ -35,15 +36,5 @@ namespace Tea {
 
     private:
         unsigned int m_ShaderID;
-    };
-
-    class ShaderLibrary
-    {
-    public:
-        static void Add(const std::string& name, const Ref<Shader>& shader) { m_Shaders[name] = shader; }
-        static Ref<Shader> Get(const std::string& name) { return m_Shaders[name]; }
-        static bool Exists(const std::string& name) { return m_Shaders[name] ? true : false; }
-    private:
-        static std::unordered_map<std::string, Ref<Shader>> m_Shaders;
     };
 }
