@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Getting Started &mdash; Tea Engine 0.1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=38b66d78"></script>
+        <script src="../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="About" href="../about/index.html" />
+    <link rel="prev" title="Welcome to Tea’s Engine documentation!" href="../index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Tea Engine
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting started</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#building">Building</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#clone-the-repository">1. Clone the repository</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#compilation">2. Compilation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#install-dependencies">1. Install Dependencies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#build">2. Build</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#enjoy">3. Enjoy!</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#features-wip">Features (WIP)</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">About</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../about/index.html">About</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Class reference:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../classes/index.html">Core</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../classes/index.html#events">Events</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../classes/index.html#imgui">ImGui</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../classes/index.html#project">Project</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../classes/index.html#renderer">Renderer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../classes/index.html#scene">Scene</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Tea Engine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Getting Started</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/getting_started/index.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="getting-started">
+<h1>Getting Started<a class="headerlink" href="#getting-started" title="Link to this heading"></a></h1>
+<p>Any IDE or Text Editor that supports CMake Projects should work for
+developing the project.</p>
+</section>
+<section id="building">
+<h1>Building<a class="headerlink" href="#building" title="Link to this heading"></a></h1>
+<section id="clone-the-repository">
+<h2>1. Clone the repository<a class="headerlink" href="#clone-the-repository" title="Link to this heading"></a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="o">--</span><span class="n">recursive</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">HugoPlacer</span><span class="o">/</span><span class="n">Tea</span><span class="o">-</span><span class="n">Engine</span><span class="o">.</span><span class="n">git</span>
+<span class="n">cd</span> <span class="n">Tea</span><span class="o">-</span><span class="n">Engine</span>
+</pre></div>
+</div>
+</section>
+<section id="compilation">
+<h2>2. Compilation<a class="headerlink" href="#compilation" title="Link to this heading"></a></h2>
+<details><summary><p>Windows</p>
+</summary><p>(Not Tested but you should use cmake with vcpkg (easiest way i think is
+with vs2022))</p>
+</details><details><summary><p>Linux</p>
+</summary><section id="install-dependencies">
+<h3>1. Install Dependencies<a class="headerlink" href="#install-dependencies" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Arch Linux</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">pacman</span> <span class="o">-</span><span class="n">S</span> <span class="n">spdlog</span> <span class="n">fmt</span> <span class="n">glfw</span> <span class="n">glm</span> <span class="n">assimp</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Fedora</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">dnf</span> <span class="n">install</span> <span class="n">spdlog</span><span class="o">-</span><span class="n">devel</span> <span class="n">fmt</span><span class="o">-</span><span class="n">devel</span> <span class="n">glfw</span><span class="o">-</span><span class="n">devel</span> <span class="n">glm</span><span class="o">-</span><span class="n">devel</span> <span class="n">assimp</span><span class="o">-</span><span class="n">devel</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Ubuntu</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="n">libspdlog</span><span class="o">-</span><span class="n">dev</span> <span class="n">libfmt</span><span class="o">-</span><span class="n">dev</span> <span class="n">libglfw3</span><span class="o">-</span><span class="n">dev</span> <span class="n">libglm</span><span class="o">-</span><span class="n">dev</span> <span class="n">libassimp</span><span class="o">-</span><span class="n">dev</span>
+</pre></div>
+</div>
+</section>
+<section id="build">
+<h3>2. Build<a class="headerlink" href="#build" title="Link to this heading"></a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>mkdir build &amp;&amp; cd build
+cmake .. -DCMAKE_BUILD_TYPE=Release
+make -j $(nproc) TeaEditor
+</pre></div>
+</div>
+</section>
+<section id="enjoy">
+<h3>3. Enjoy!<a class="headerlink" href="#enjoy" title="Link to this heading"></a></h3>
+</section>
+</section>
+</section>
+<section id="features-wip">
+<h1>Features (WIP)<a class="headerlink" href="#features-wip" title="Link to this heading"></a></h1>
+<ul class="simple">
+<li><p>[x] Compatible with Windows and Linux.</p></li>
+<li><p>[x] 3D Rendering</p>
+<ul>
+<li><p>[x] Textures</p></li>
+<li><p>[x] Materials</p></li>
+<li><p>[x] Shaders</p></li>
+<li><p>[ ] PBR Rendering</p></li>
+<li><p>[ ] Lights</p></li>
+<li><p>[ ] Environment</p></li>
+</ul>
+</li>
+<li><p>[x] Scene System</p>
+<ul>
+<li><p>[x] Scene Tree</p></li>
+<li><p>[x] ECS System</p></li>
+<li><p>[x] Model Loading</p></li>
+</ul>
+</li>
+<li><p>[x] Editor</p></li>
+<li><p>[ ] Save And Loading</p></li>
+</ul>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../index.html" class="btn btn-neutral float-left" title="Welcome to Tea’s Engine documentation!" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../about/index.html" class="btn btn-neutral float-right" title="About" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Hugo Planell Moreno, Mario Dorado Martínez.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
