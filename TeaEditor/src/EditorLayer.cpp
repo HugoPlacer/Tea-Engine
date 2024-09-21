@@ -9,7 +9,6 @@
 #include "TeaEngine/Renderer/DebugRenderer.h"
 #include "TeaEngine/Renderer/EditorCamera.h"
 #include "TeaEngine/Renderer/Renderer.h"
-#include "TeaEngine/Renderer/RendererAPI.h"
 #include "TeaEngine/Scene/Components.h"
 #include "TeaEngine/Scene/Scene.h"
 #include "Panels/SceneTreePanel.h"
@@ -44,6 +43,10 @@ namespace Tea {
         m_ActiveScene->OnInit();
 
         m_SceneTreePanel.SetContext(m_ActiveScene);
+
+        // Panels
+        m_Panels.push_back(std::make_shared<SceneTreePanel>(m_ActiveScene));
+        m_Panels.push_back(std::make_shared<ContentBrowserPanel>(m_ActiveScene));
 
         //For now we are going to create a new project when the editor is attached
         Project::New();
@@ -130,6 +133,7 @@ namespace Tea {
                 if (ImGui::MenuItem("Open Scene...", "Ctrl+O")) { OpenScene(); }
                 if (ImGui::MenuItem("Save Scene", "Ctrl+S")) { SaveScene(); }
                 if (ImGui::MenuItem("Save Scene As...", "Ctrl+Shift+S")) { SaveSceneAs(); }
+                if (ImGui::MenuItem("Exit")) { Application::Get().Close(); }
                 ImGui::EndMenu();
             }
             if (ImGui::BeginMenu("Project"))
@@ -137,7 +141,6 @@ namespace Tea {
                 if (ImGui::MenuItem("New Project...", "Ctrl+N")) { NewProject(); }
                 if (ImGui::MenuItem("Open Project...", "Ctrl+O")) { OpenProject(); }
                 if (ImGui::MenuItem("Save Project", "Ctrl+S")) { SaveProject(); }
-                if (ImGui::MenuItem("Exit")) { Application::Get().Close(); }
                 ImGui::EndMenu();
             }
             if (ImGui::BeginMenu("Editor"))
@@ -191,7 +194,11 @@ namespace Tea {
             ImGui::EndMainMenuBar();
         }
 
-        m_SceneTreePanel.OnImGuiRender();
+        // Iterate over all panels and render them
+        for (const auto& panel : m_Panels)
+        {
+            panel->OnImGuiRender();
+        }
 
         ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(0, 0));
         ImGui::Begin("Viewport");
@@ -325,6 +332,30 @@ namespace Tea {
 
             Renderer::Submit(selectedShader, meshComponent.mesh->GetVertexArray(), transform);
         } */
+
+        auto view = m_ActiveScene->GetAllEntitiesWithComponents<LightComponent, TransformComponent>();
+
+        for(auto entity : view)
+        {
+            auto& lightComponent = view.get<LightComponent>(entity);
+            auto& transformComponent = view.get<TransformComponent>(entity);
+
+            switch (lightComponent.type) {
+                case LightComponent::Type::DirectionalLight:
+                    //DebugRenderer::DrawArrow(transformComponent.GetWorldTransform()[3], lightComponent.Direction, lightComponent.Intensity);
+                    DebugRenderer::DrawArrow(transformComponent.GetWorldTransform()[3], lightComponent.Direction, 1.5f);
+                break;
+
+                case LightComponent::Type::PointLight:
+                    glm::vec3 worldPosition = transformComponent.GetWorldTransform()[3];
+                    float radius = lightComponent.Range;
+                    DebugRenderer::DrawSphere(worldPosition, radius);
+                break;
+
+                /* case LightComponent::Type::SpotLight:
+                break;    */         
+            }
+        }
 
         DebugRenderer::DrawLine({-1000.0f, 0.0f, 0.0f}, {1000.0f, 0.0f, 0.0f}, {0.918f, 0.196f, 0.310f, 1.0f}, 2);
         DebugRenderer::DrawLine({0.0f, -1000.0f, 0.0f}, {0.0f, 1000.0f, 0.0f}, {0.502f, 0.800f, 0.051f, 1.0f}, 2);

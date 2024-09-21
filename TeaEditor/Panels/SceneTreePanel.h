@@ -3,11 +3,12 @@
 #include "TeaEngine/Core/Base.h"
 #include "TeaEngine/Scene/Scene.h"
 #include "TeaEngine/Scene/Entity.h"
+#include "Panel.h"
 #include "entt/entity/fwd.hpp"
 
 namespace Tea {
 
-    class SceneTreePanel
+    class SceneTreePanel : public Panel
     {
     public:
         SceneTreePanel() = default;
@@ -15,7 +16,7 @@ namespace Tea {
 
         void SetContext(const Ref<Scene>& scene);
 
-        void OnImGuiRender();
+        void OnImGuiRender() override;
 
         Entity GetSelectedEntity() const { return m_SelectionContext; };
     private:

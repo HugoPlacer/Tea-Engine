@@ -3,7 +3,6 @@ CMakeCache.txt
 CMakeFiles
 CMakeScripts
 Testing
-Makefile
 cmake_install.cmake
 install_manifest.txt
 compile_commands.json
@@ -19,3 +18,6 @@ bin
 /traces
 /.idea
 /cmake-build-debug
+/.vs
+/cmake-build-debug-event-trace
+/cmake-build-debug-visual-studio
