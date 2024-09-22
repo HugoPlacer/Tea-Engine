@@ -43,10 +43,7 @@ namespace Tea {
         m_ActiveScene->OnInit();
 
         m_SceneTreePanel.SetContext(m_ActiveScene);
-
-        // Panels
-        m_Panels.push_back(std::make_shared<SceneTreePanel>(m_ActiveScene));
-        m_Panels.push_back(std::make_shared<ContentBrowserPanel>(m_ActiveScene));
+        m_ContentBrowserPanel.SetContext(m_ActiveScene);
 
         //For now we are going to create a new project when the editor is attached
         Project::New();
@@ -194,11 +191,8 @@ namespace Tea {
             ImGui::EndMainMenuBar();
         }
 
-        // Iterate over all panels and render them
-        for (const auto& panel : m_Panels)
-        {
-            panel->OnImGuiRender();
-        }
+        m_SceneTreePanel.OnImGuiRender();
+        m_ContentBrowserPanel.OnImGuiRender();
 
         ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(0, 0));
         ImGui::Begin("Viewport");
@@ -442,6 +436,7 @@ namespace Tea {
         m_SceneTreePanel = SceneTreePanel();
 
         m_SceneTreePanel.SetContext(m_ActiveScene);
+        m_ContentBrowserPanel.SetContext(m_ActiveScene);
     }
 
     void EditorLayer::OpenScene()
@@ -458,6 +453,7 @@ namespace Tea {
             m_SceneTreePanel = SceneTreePanel();
 
             m_SceneTreePanel.SetContext(m_ActiveScene);
+            m_ContentBrowserPanel.SetContext(m_ActiveScene);
         }
         else
         {
