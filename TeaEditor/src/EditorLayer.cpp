@@ -4,6 +4,7 @@
 #include "TeaEngine/Core/Log.h"
 #include "TeaEngine/Core/Application.h"
 #include "TeaEngine/Events/KeyEvent.h"
+#include "TeaEngine/IO/ResourceRegistry.h"
 #include "TeaEngine/PrimitiveMesh.h"
 #include "TeaEngine/Project/Project.h"
 #include "TeaEngine/Renderer/DebugRenderer.h"
@@ -44,11 +45,6 @@ namespace Tea {
 
         m_SceneTreePanel.SetContext(m_ActiveScene);
         m_ContentBrowserPanel.SetContext(m_ActiveScene);
-
-        // Panels
-        m_Panels.push_back(std::make_shared<SceneTreePanel>(m_ActiveScene));
-        m_Panels.push_back(std::make_shared<ContentBrowserPanel>(m_ActiveScene));
-        m_Panels.push_back(std::make_shared<OutputPanel>());
 
         //For now we are going to create a new project when the editor is attached
         Project::New();
@@ -135,6 +131,7 @@ namespace Tea {
                 if (ImGui::MenuItem("Open Scene...", "Ctrl+O")) { OpenScene(); }
                 if (ImGui::MenuItem("Save Scene", "Ctrl+S")) { SaveScene(); }
                 if (ImGui::MenuItem("Save Scene As...", "Ctrl+Shift+S")) { SaveSceneAs(); }
+                if (ImGui::MenuItem("Exit")) { Application::Get().Close(); }
                 ImGui::EndMenu();
             }
             if (ImGui::BeginMenu("Project"))
@@ -142,7 +139,6 @@ namespace Tea {
                 if (ImGui::MenuItem("New Project...", "Ctrl+N")) { NewProject(); }
                 if (ImGui::MenuItem("Open Project...", "Ctrl+O")) { OpenProject(); }
                 if (ImGui::MenuItem("Save Project", "Ctrl+S")) { SaveProject(); }
-                if (ImGui::MenuItem("Exit")) { Application::Get().Close(); }
                 ImGui::EndMenu();
             }
             if (ImGui::BeginMenu("Editor"))
@@ -196,11 +192,8 @@ namespace Tea {
             ImGui::EndMainMenuBar();
         }
 
-        // Iterate over all panels and render them
-        for (const auto& panel : m_Panels)
-        {
-            panel->OnImGuiRender();
-        }
+        m_SceneTreePanel.OnImGuiRender();
+        m_ContentBrowserPanel.OnImGuiRender();
 
         ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(0, 0));
         ImGui::Begin("Viewport");
@@ -312,6 +305,20 @@ namespace Tea {
         ImGui::Checkbox("Post Processing", &Renderer::GetRenderSettings().PostProcessing);
 
         ImGui::DragFloat("Exposure", &Renderer::GetRenderSettings().Exposure, 0.001f, 100.0f);
+
+        ImGui::End();
+
+        //Debug Window for testing the ResourceRegistry
+        ImGui::Begin("Resource Registry");
+
+        auto& resources = ResourceRegistry::GetResourceRegistry();
+
+        for(auto& resource : resources)
+        {
+            ImGui::Text(resource.first.c_str());
+            ImGui::SameLine();
+            ImGui::Text("Use Count: %ld", resource.second.use_count() - 1);
+        }
 
         ImGui::End();
     }
@@ -444,6 +451,7 @@ namespace Tea {
         m_SceneTreePanel = SceneTreePanel();
 
         m_SceneTreePanel.SetContext(m_ActiveScene);
+        m_ContentBrowserPanel.SetContext(m_ActiveScene);
     }
 
     void EditorLayer::OpenScene()
@@ -460,6 +468,7 @@ namespace Tea {
             m_SceneTreePanel = SceneTreePanel();
 
             m_SceneTreePanel.SetContext(m_ActiveScene);
+            m_ContentBrowserPanel.SetContext(m_ActiveScene);
         }
         else
         {

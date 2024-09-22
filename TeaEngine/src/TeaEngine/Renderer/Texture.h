@@ -1,7 +1,7 @@
 #pragma once
 
-#include "TeaEngine/Core/Assert.h"
 #include "TeaEngine/Core/Base.h"
+#include "TeaEngine/IO/Resource.h"
 #include "TeaEngine/Renderer/Image.h"
 
 #include <cstdint>
@@ -42,11 +42,10 @@ namespace Tea {
         bool GenerateMipmaps = true; ///< Whether to generate mipmaps.
         bool srgb = true; ///< Whether the texture is in sRGB format.
     };
-
     /**
      * @brief Class representing a texture.
      */
-    class Texture
+    class Texture : public Resource
     {
     public:
         /**
@@ -68,7 +67,7 @@ namespace Tea {
          * @param path The file path to the texture.
          * @param srgb Whether the texture is in sRGB format.
          */
-        Texture(const std::string& path, bool srgb = true);
+        Texture(const std::filesystem::path& path, bool srgb = true);
 
         /**
          * @brief Destructor for the Texture class.
@@ -112,17 +111,6 @@ namespace Tea {
          */
         uint32_t GetID() { return m_textureID; };
 
-        /**
-         * @brief Gets the file path of the texture.
-         * @return The file path of the texture.
-         */
-        const std::string& GetPath() { TEA_CORE_ASSERT(m_FilePath.empty(), "This Texture does not exist on disk!") return m_FilePath; };
-
-        /**
-         * @brief Sets the data of the texture.
-         * @param data The data to set.
-         * @param size The size of the data.
-         */
         void SetData(void* data, uint32_t size);
 
         /**
@@ -137,7 +125,7 @@ namespace Tea {
          * @param srgb Whether the texture is in sRGB format.
          * @return A reference to the loaded texture.
          */
-        static Ref<Texture> Load(const std::string& path, bool srgb = true);
+        static Ref<Texture> Load(const std::filesystem::path& path, bool srgb = true);
 
         /**
          * @brief Creates a texture with the specified width, height, and format.
@@ -150,40 +138,7 @@ namespace Tea {
     private:
         TextureProperties m_Properties; ///< The properties of the texture.
 
-        std::string m_FilePath; ///< The file path of the texture.
-        uint32_t m_textureID; ///< The ID of the texture.
-        int m_Width, m_Height; ///< The width and height of the texture.
+        uint32_t m_textureID;
+        int m_Width, m_Height;
     };
-
-    /**
-     * @brief Class representing a library of textures.
-     */
-    class TextureLibrary
-    {
-    public:
-        /**
-         * @brief Adds a texture to the library.
-         * @param name The name of the texture.
-         * @param texture A reference to the texture.
-         */
-        static void Add(const std::string& name, const Ref<Texture>& texture) { m_Textures[name] = texture; }
-
-        /**
-         * @brief Gets a texture from the library by name.
-         * @param name The name of the texture.
-         * @return A reference to the texture.
-         */
-        static Ref<Texture> Get(const std::string& name) { return m_Textures[name]; }
-
-        /**
-         * @brief Checks if a texture exists in the library by name.
-         * @param name The name of the texture.
-         * @return True if the texture exists, false otherwise.
-         */
-        static bool Exists(const std::string& name) { return m_Textures[name] ? true : false; }
-    private:
-        static std::unordered_map<std::string, Ref<Texture>> m_Textures; ///< The map of textures.
-    };
-
-    /** @} */
 }

@@ -16,10 +16,15 @@ namespace Tea {
         void SetContext(const Ref<Scene>& scene);
 
         void OnImGuiRender() override;
-
+    
     private:
-        Ref<Scene> m_Context;
+        void DisplayDirectoryContents(const std::filesystem::path& directory, int depth);
+    private:
         std::filesystem::path m_CurrentDirectory;
+
+        std::filesystem::path m_SelectedDirectory;
+
+        Ref<Scene> m_Context;
     };
 
 }
